@@ -7,7 +7,7 @@ def main():
     title_font = {'color': 'blue', 'size': 20}
 
     plt.title("100 Miles in May tracker", fontdict=title_font)
-    plt.xlabel("Days of the month")
+    plt.xlabel("Days into challenge")
     plt.ylabel("Cumulative mileage")
 
     # projected target
@@ -17,7 +17,6 @@ def main():
     # actual progress
     with open('miles.txt') as f:
         miles = [float(x) for x in f.readlines()]
-        f.close()
 
     total_miles = []
     for x in range(len(miles)):
@@ -27,11 +26,17 @@ def main():
             total = miles[x]
         total_miles.append(total)
 
+    def average_total(total):
+        return sum(total) / len(total)
+
     actual_x = np.array(list(range(len(miles))))
     actual_y = np.array(total_miles)
+    estimated_y = np.array([0, average_total(miles)*30])
 
-    plt.plot(actual_x, actual_y, c='#54BB66')
-    plt.plot(projected_x, projected_y, c='#999999')
+    plt.plot(actual_x, actual_y, c='#54BB66', label='Current progress')
+    plt.plot(projected_x, projected_y, c='#999999', label='Target')
+    plt.plot(projected_x, estimated_y, c='#54BB66', ls='--', label='Projection of average')
+    plt.legend()
     plt.show()
 
 
