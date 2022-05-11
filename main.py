@@ -26,12 +26,16 @@ def main():
             total = miles[x]
         total_miles.append(total)
 
-    def average_total(total):
-        return sum(total) / len(total)
+    def average_total(mileage):
+        return sum(mileage) / len(mileage)
 
     actual_x = np.array(list(range(len(miles))))
     actual_y = np.array(total_miles)
     estimated_y = np.array([0, average_total(miles)*30])
+
+    # print output
+    print(f"Current progress: {total_miles[-1]}/100 miles")
+    print(f"Estimated time to complete: {round(100/average_total(miles))} days")
 
     plt.plot(actual_x, actual_y, c='#54BB66', label='Current progress')
     plt.plot(projected_x, projected_y, c='#999999', label='Target')
