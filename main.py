@@ -33,13 +33,9 @@ def main():
     actual_y = np.array(total_miles)
     estimated_y = np.array([0, average_total(miles)*30])
 
-    # print output
-    print(f"Current progress: {total_miles[-1]}/100 miles")
-    print(f"Estimated time to complete: {round(100/average_total(miles))} days")
-
-    plt.plot(actual_x, actual_y, c='#54BB66', label='Current progress')
-    plt.plot(projected_x, projected_y, c='#999999', label='Target')
-    plt.plot(projected_x, estimated_y, c='#54BB66', ls='--', label='Projection of average')
+    plt.plot(actual_x, actual_y, c='#54BB66', label=f"Current progress: {total_miles[-1]}/100 miles")
+    plt.plot(projected_x, projected_y, c='#999999', label=f"Target: complete by day {round(100/average_total(miles))}")
+    plt.plot(projected_x, estimated_y, c='#54BB66', ls='--', label=f"Projection of average ({round(average_total(miles), 2)} per day)")
     plt.legend()
     plt.show()
 
